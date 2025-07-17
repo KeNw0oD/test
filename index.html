@@ -1,15 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALGO 7</title>
+
+  <!-- Orbitron Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+
+  <!-- Main Styles -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Sparkling Particles -->
+  <div class="particles-container"></div>
+
+  <!-- Background Animation Overlay -->
+  <div class="overlay-animation"></div>
+
+  <!-- Navigation Buttons -->
   <div class="button-container">
     <a href="leaderboard.html" class="btn">LEADERBOARD</a>
     <a href="register.html" class="btn">REGISTER / LOGIN</a>
   </div>
+
+  <script>
+    const container = document.querySelector('.particles-container');
+    const count = 40;
+
+    for (let i = 0; i < count; i++) {
+      const spark = document.createElement('span');
+      spark.style.left = Math.random() * 100 + 'vw';
+      spark.style.animationDuration = (6 + Math.random() * 6) + 's';
+      spark.style.animationDelay = Math.random() * 10 + 's';
+      spark.style.opacity = 0.3 + Math.random() * 0.4;
+      spark.style.background = 'rgba(255, 215, 0, 0.7)';
+      spark.style.width = spark.style.height = (Math.random() * 3 + 2) + 'px';
+      container.appendChild(spark);
+    }
+  </script>
 </body>
 </html>

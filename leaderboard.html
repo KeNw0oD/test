@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,102 +9,13 @@
   <!-- Orbitron font -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-image: url('background-leaderboard.png');
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center;
-      font-family: 'Orbitron', sans-serif;
-      color: gold;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 0;
-    }
-
-    h1 {
-      font-size: 48px;
-      font-weight: bold;
-      letter-spacing: 4px;
-      margin-bottom: 30px;
-      color: #d4a24f;
-      text-shadow: 0 0 10px rgba(212, 162, 79, 0.5);
-    }
-
-    .scroll-box {
-      flex: 1;
-      width: 95%;
-      max-width: 800px;
-      overflow-y: scroll;
-      display: flex;
-      flex-direction: column-reverse;
-      gap: 20px;
-      padding-bottom: 20px;
-    }
-
-    .scroll-box::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-    }
-
-    .scroll-box {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    .user-box {
-      padding: 16px 28px;
-      font-size: 20px;
-      border: 2px solid #d4a24f;
-      background: linear-gradient(145deg, #111111, #1c1c1c);
-      color: #d4a24f;
-      border-radius: 14px;
-      font-weight: bold;
-      letter-spacing: 1.2px;
-      box-shadow: 0 0 12px rgba(212, 162, 79, 0.2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .user-box span {
-      font-size: 17px;
-      opacity: 0.85;
-    }
-
-    .back-btn {
-      padding: 14px 36px;
-      font-size: 18px;
-      border: 2px solid #d4a24f;
-      background: linear-gradient(145deg, #111111, #1c1c1c);
-      color: #d4a24f;
-      border-radius: 12px;
-      font-weight: bold;
-      letter-spacing: 1.5px;
-      box-shadow: 0 0 12px rgba(212, 162, 79, 0.2);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      margin-top: 20px;
-    }
-
-    .back-btn:hover {
-      background: #d4a24f;
-      color: #000;
-      box-shadow: 0 0 20px rgba(212, 162, 79, 0.6);
-    }
-  </style>
+  <!-- External CSS -->
+  <link rel="stylesheet" href="leaderboard.css" />
 </head>
 <body>
+
+  <div class="particles-container"></div>
+  <div class="overlay-animation"></div>
 
   <h1>LEADERBOARD</h1>
   <div class="scroll-box" id="userList"></div>
@@ -141,6 +53,21 @@
 
     fetchData();
     setInterval(fetchData, 60000);
+
+    // Spark particles
+    const container = document.querySelector('.particles-container');
+    const count = 40;
+
+    for (let i = 0; i < count; i++) {
+      const spark = document.createElement('span');
+      spark.style.left = Math.random() * 100 + 'vw';
+      spark.style.animationDuration = (6 + Math.random() * 6) + 's';
+      spark.style.animationDelay = Math.random() * 10 + 's';
+      spark.style.opacity = 0.3 + Math.random() * 0.4;
+      spark.style.background = 'rgba(255, 215, 0, 0.7)';
+      spark.style.width = spark.style.height = (Math.random() * 3 + 2) + 'px';
+      container.appendChild(spark);
+    }
   </script>
 </body>
 </html>

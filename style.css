@@ -9,25 +9,28 @@ body {
   background-image: url('background.png');
   background-size: cover;
   background-position: center;
-  font-family: 'Georgia', serif;
+  font-family: 'Orbitron', sans-serif;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   color: gold;
+  position: relative;
+  overflow: hidden;
 }
 
 .button-container {
-  margin-bottom: 60px;
+  margin-bottom: 205px;
   display: flex;
-  gap: 20px;
+  gap: 140px;
+  z-index: 1;
 }
 
 .btn {
-  padding: 14px 36px;
-  font-size: 18px;
-  font-family: 'Georgia', serif;
+  padding: 15px 61px;
+  font-size: 21px;
+  font-family: 'Orbitron', sans-serif;
   font-weight: bold;
   letter-spacing: 1.5px;
   color: #d4a24f;
@@ -44,4 +47,66 @@ body {
   background: #d4a24f;
   color: #000;
   box-shadow: 0 0 20px rgba(212, 162, 79, 0.5);
+}
+
+/* 🔮 Анимация свечения */
+.overlay-animation::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.08), transparent 60%);
+  animation: float 25s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(8%, 12%) rotate(180deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+/* ✨ Искры */
+.particles-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particles-container span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: gold;
+  opacity: 0.4;
+  border-radius: 50%;
+  animation: sparkle 10s linear infinite;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
 }
