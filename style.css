@@ -306,3 +306,25 @@ body {
   color: #5a67d8;
   font-weight: bold;
 }
+
+.tab-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 20px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  color: #5a67d8;
+}
+
+.tab-btn.active {
+  border-color: #5a67d8;
+}

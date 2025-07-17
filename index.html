@@ -40,27 +40,46 @@
 </div>
 
 <!-- Модальное окно -->
+<!-- Модальное окно -->
 <div class="modal" id="registerModal">
-<div class="modal-content">
-<span class="close" onclick="closeModal()">×</span>
-<h2>Register</h2>
-<form onsubmit="handleRegister(event)">
-  <label for="nickname">Nickname:</label>
-  <input id="nicknameInput" required type="text"/>
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">×</span>
 
-  <label for="email">Email:</label>
-  <input id="email" required type="email"/>
+    <div class="tab-header">
+      <button class="tab-btn active" onclick="switchTab('register')">Register</button>
+      <button class="tab-btn" onclick="switchTab('login')">Login</button>
+    </div>
 
-  <label for="password">Password:</label>
-  <input id="password" required type="password"/>
+    <!-- Register -->
+    <form id="registerForm" onsubmit="handleRegister(event)">
+      <label>Nickname:</label>
+      <input id="nicknameInput" required type="text"/>
 
-  <button class="btn" type="submit">Submit</button>
-</form>
-<div id="registerMessage" class="register-message"></div>
+      <label>Email:</label>
+      <input id="email" required type="email"/>
 
+      <label>Password:</label>
+      <input id="password" required type="password"/>
+
+      <button class="btn" type="submit">Submit</button>
+      <div id="registerMessage" class="register-message"></div>
+    </form>
+
+    <!-- Login -->
+    <form id="loginForm" style="display: none;" onsubmit="handleLogin(event)">
+      <label>Email:</label>
+      <input id="loginEmail" required type="email"/>
+
+      <label>Password:</label>
+      <input id="loginPassword" required type="password"/>
+
+      <button class="btn" type="submit">Login</button>
+      <div id="loginMessage" class="register-message"></div>
+    </form>
+
+  </div>
 </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+
 <script src="main.js"></script>
 
 </body>
