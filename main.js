@@ -24,19 +24,43 @@ function registerUser(nickname, email, password) {
 }
 
 // Обработка формы регистрации
+// === РЕГИСТРАЦИЯ ===
 function handleRegister(e) {
-  console.log("Регистрация нажата");
   e.preventDefault();
   const nickname = document.getElementById("nicknameInput").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
 
-  if (nickname && email && password) {
-    registerUser(nickname, email, password);
-  } else {
+  if (!nickname || !email || !password) {
     alert("Пожалуйста, заполните все поля");
+    return;
   }
+
+  fetch("https://zhqzyklwmqygixugujel.supabase.co/rest/v1/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpocXp5a2x3bXF5Z2l4dWd1amVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3ODc2MDgsImV4cCI6MjA2ODM2MzYwOH0.ZXqFeFrG7SVTDlad6AqOAoG2ZgeRAqru_wKg4X0jmGM",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpocXp5a2x3bXF5Z2l4dWd1amVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3ODc2MDgsImV4cCI6MjA2ODM2MzYwOH0.ZXqFeFrG7SVTDlad6AqOAoG2ZgeRAqru_wKg4X0jmGM",
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({ nickname, email, password })
+  })
+    .then(res => {
+      if (res.ok) {
+        alert("✅ Успешно зарегистрирован!");
+        localStorage.setItem("loggedInUser", nickname);
+        location.reload();
+      } else {
+        alert("❌ Ошибка при регистрации");
+      }
+    })
+    .catch(err => {
+      console.error("Ошибка при отправке запроса:", err);
+      alert("⚠️ Что-то пошло не так");
+    });
 }
+
 
 // Остальной код можешь оставить как есть (спарки, логика профиля и т.д.)
 
@@ -71,14 +95,43 @@ window.onclick = function(event) {
 };
 
 // === РЕГИСТРАЦИЯ ===
+// === РЕГИСТРАЦИЯ ===
 function handleRegister(e) {
   e.preventDefault();
   const nickname = document.getElementById("nicknameInput").value.trim();
-  if (nickname) {
-    localStorage.setItem("loggedInUser", nickname);
-    location.reload();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (!nickname || !email || !password) {
+    alert("Пожалуйста, заполните все поля");
+    return;
   }
+
+  fetch("https://zhqzyklwmqygixugujel.supabase.co/rest/v1/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpocXp5a2x3bXF5Z2l4dWd1amVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3ODc2MDgsImV4cCI6MjA2ODM2MzYwOH0.ZXqFeFrG7SVTDlad6AqOAoG2ZgeRAqru_wKg4X0jmGM",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpocXp5a2x3bXF5Z2l4dWd1amVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3ODc2MDgsImV4cCI6MjA2ODM2MzYwOH0.ZXqFeFrG7SVTDlad6AqOAoG2ZgeRAqru_wKg4X0jmGM",
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({ nickname, email, password })
+  })
+    .then(res => {
+      if (res.ok) {
+        alert("✅ Успешно зарегистрирован!");
+        localStorage.setItem("loggedInUser", nickname);
+        location.reload();
+      } else {
+        alert("❌ Ошибка при регистрации");
+      }
+    })
+    .catch(err => {
+      console.error("Ошибка при отправке запроса:", err);
+      alert("⚠️ Что-то пошло не так");
+    });
 }
+
 
 // === ПРОФИЛЬ ===
 function logout() {
