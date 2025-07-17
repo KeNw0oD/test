@@ -164,7 +164,7 @@ window.onload = function () {
 
         for (let i = 0; i < data.length; i++) {
           const entry = data[i];
-          if (entry.user.toLowerCase() === user.toLowerCase())) {
+          if (entry.user.toLowerCase() === user.toLowerCase()) {
             document.getElementById("userRank").textContent = `Position:  #${i + 1}`;
             document.getElementById("userWager").textContent = `Wager:  ${entry.wager}`;
             break;
