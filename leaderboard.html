@@ -58,7 +58,7 @@
         div.className = 'user-box';
 
         // Подсветка текущего пользователя
-        if (entry.user === loggedUser) {
+        if (entry.user.toLowerCase() === loggedUser.toLowerCase()) {
           div.style.background = 'gold';
           div.style.color = 'black';
           div.style.boxShadow = '0 0 15px gold';
