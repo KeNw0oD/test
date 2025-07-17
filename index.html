@@ -1,31 +1,27 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALGO 7</title>
-
-  <!-- Orbitron Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Main Styles -->
-  <link rel="stylesheet" href="style.css" />
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ALGO 7</title>
+<!-- Orbitron Font -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main Styles -->
+<link href="style.css" rel="stylesheet">
+</link></head>
 <body>
-  <!-- Sparkling Particles -->
-  <div class="particles-container"></div>
-
-  <!-- Background Animation Overlay -->
-  <div class="overlay-animation"></div>
-
-  <!-- Navigation Buttons -->
-  <div class="button-container">
-    <a href="leaderboard.html" class="btn">LEADERBOARD</a>
-    <a href="register.html" class="btn">REGISTER / LOGIN</a>
-  </div>
-
-  <script>
+<!-- Sparkling Particles -->
+<div class="particles-container"></div>
+<!-- Background Animation Overlay -->
+<div class="overlay-animation"></div>
+<!-- Navigation Buttons -->
+<div class="button-container">
+<a class="btn" href="leaderboard.html">LEADERBOARD</a>
+<a class="btn" href="#" onclick="openModal()">REGISTER / LOGIN</a>
+</div>
+<script>
     const container = document.querySelector('.particles-container');
     const count = 40;
 
@@ -35,10 +31,39 @@
       spark.style.animationDuration = (6 + Math.random() * 6) + 's';
       spark.style.animationDelay = Math.random() * 10 + 's';
       spark.style.opacity = 0.3 + Math.random() * 0.4;
-      spark.style.background = 'rgba(255, 215, 0, 0.7)';
+      spark.style.background = 'rgba(90, 103, 216, 0.7)';
       spark.style.width = spark.style.height = (Math.random() * 3 + 2) + 'px';
       container.appendChild(spark);
     }
   </script>
+
+<!-- Модальное окно -->
+<div class="modal" id="registerModal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">×</span>
+<h2>Register</h2>
+<form>
+<label for="email">Email:</label>
+<input id="email" required="" type="email"/>
+<label for="password">Password:</label>
+<input id="password" required="" type="password"/>
+<button class="btn" type="submit">Submit</button>
+</form>
+</div>
+</div>
+<script>
+  function openModal() {
+    document.getElementById("registerModal").style.display = "flex";
+  }
+  function closeModal() {
+    document.getElementById("registerModal").style.display = "none";
+  }
+  window.onclick = function(event) {
+    const modal = document.getElementById("registerModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
 </body>
 </html>
