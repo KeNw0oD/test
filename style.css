@@ -9,7 +9,7 @@ body {
   background-image: url('background.png');
   background-size: cover;
   background-position: center;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Slab', serif;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -30,7 +30,7 @@ body {
 .btn {
   padding: 15px 61px;
   font-size: 21px;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Slab', serif;
   font-weight: bold;
   letter-spacing: 1.5px;
   color: #d4a24f;
