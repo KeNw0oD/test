@@ -44,42 +44,58 @@ function handleRegister(e) {
   const nickname = nicknameRaw.toLowerCase();
 
   if (!nickname || !email || !password) {
-    document.getElementById("registerMessage").textContent = "⚠️ Пожалуйста, заполните все поля";
-    document.getElementById("registerMessage").style.color = "#e53e3e"; // красный
+    document.getElementById("registerMessage").textContent = "⚠️ Please fill in all fields";
+    document.getElementById("registerMessage").style.color = "#e53e3e";
     return;
   }
 
-  fetch("https://zhqzyklwmqygixugujel.supabase.co/rest/v1/users", {
-    method: "POST",
+  // 🔍 Проверка: такой nickname уже есть
+  fetch(`${SUPABASE_URL}/rest/v1/users?nickname=eq.${nickname}`, {
     headers: {
-      "Content-Type": "application/json",
-      "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpocXp5a2x3bXF5Z2l4dWd1amVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3ODc2MDgsImV4cCI6MjA2ODM2MzYwOH0.ZXqFeFrG7SVTDlad6AqOAoG2ZgeRAqru_wKg4X0jmGM",
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpocXp5a2x3bXF5Z2l4dWd1amVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3ODc2MDgsImV4cCI6MjA2ODM2MzYwOH0.ZXqFeFrG7SVTDlad6AqOAoG2ZgeRAqru_wKg4X0jmGM",
-      "Prefer": "return=minimal"
-    },
-    body: JSON.stringify({ nickname, email, password })
+      "apikey": SUPABASE_KEY,
+      "Authorization": `Bearer ${SUPABASE_KEY}`
+    }
+  })
+  .then(res => res.json())
+  .then(users => {
+    if (users.length > 0) {
+      document.getElementById("registerMessage").textContent = "⚠️ This nickname is already taken";
+      document.getElementById("registerMessage").style.color = "#e53e3e";
+      throw new Error("nickname exists");
+    }
+
+    // ✅ Регистрация, если ник свободен
+    return fetch(`${SUPABASE_URL}/rest/v1/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify({ nickname, email, password })
+    });
   })
   .then(res => {
-    if (res.ok) {
+    if (res?.ok) {
       document.getElementById("registerMessage").textContent = "✅ Successfully registered!";
-      document.getElementById("registerMessage").style.color = "#38a169"; // зелёный
-
+      document.getElementById("registerMessage").style.color = "#38a169";
       localStorage.setItem("loggedInUser", nickname);
-
-      setTimeout(() => {
-        location.reload();
-      }, 1200);
+      setTimeout(() => location.reload(), 1200);
     } else {
-      document.getElementById("registerMessage").textContent = "❌ Ошибка регистрации";
+      document.getElementById("registerMessage").textContent = "❌ Registration failed";
       document.getElementById("registerMessage").style.color = "#e53e3e";
     }
   })
   .catch(err => {
-    console.error("Ошибка при отправке запроса:", err);
-    document.getElementById("registerMessage").textContent = "⚠️ Ошибка соединения";
-    document.getElementById("registerMessage").style.color = "#e53e3e";
+    if (err.message !== "nickname exists") {
+      console.error("Registration error:", err);
+      document.getElementById("registerMessage").textContent = "⚠️ Connection error";
+      document.getElementById("registerMessage").style.color = "#e53e3e";
+    }
   });
 }
+
 
 
 
