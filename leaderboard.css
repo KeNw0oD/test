@@ -36,7 +36,7 @@ h1 {
   max-width: 800px;
   overflow-y: scroll;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: 20px;
   padding-bottom: 20px;
   z-index: 1;
@@ -110,12 +110,13 @@ h1 {
 
 .particles-container span {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(90, 103, 216, 0.6);
-  opacity: 0.4;
+  width: 5px;
+  height: 5px;
+  background: rgba(130, 150, 255, 0.85);
+  opacity: 0.9;
   border-radius: 50%;
-  animation: sparkle 10s linear infinite;
+  animation: sparkle 5s linear infinite;
+  box-shadow: 0 0 8px rgba(130, 150, 255, 0.9);
 }
 
 @keyframes sparkle {
@@ -154,4 +155,102 @@ h1 {
   background: #5a67d8;
   color: #fff;
   box-shadow: 0 0 20px rgba(90, 103, 216, 0.6);
+}
+
+.profile-block {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 10;
+}
+
+.nickname {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  color: #5a67d8;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid #5a67d8;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.nickname:hover {
+  background: #5a67d8;
+  color: white;
+}
+
+.pfp {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #5a67d8;
+}
+
+.dropdown {
+  display: none;
+  margin-top: 8px;
+  background: rgba(30, 35, 80, 0.85);
+  border: 1px solid #5a67d8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+.dropdown button {
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  text-align: right;
+}
+
+.dropdown button:hover {
+  background: rgba(90, 103, 216, 0.2);
+}
+
+.user-stats {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 14px;
+  color: white;
+  opacity: 0.85;
+  gap: 2px;
+}
+
+.nickname-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+  margin-left: 8px;
+  color: #8cb4ff;
+  font-size: 14px;
+}
+
+.nickname-text {
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+}
+
+.rank-text,
+.wager-text {
+  font-weight: 400;
 }

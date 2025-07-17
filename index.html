@@ -16,54 +16,49 @@
 <div class="particles-container"></div>
 <!-- Background Animation Overlay -->
 <div class="overlay-animation"></div>
-<!-- Navigation Buttons -->
-<div class="button-container">
-<a class="btn" href="leaderboard.html">LEADERBOARD</a>
-<a class="btn" href="#" onclick="openModal()">REGISTER / LOGIN</a>
-</div>
-<script>
-    const container = document.querySelector('.particles-container');
-    const count = 40;
+<!-- Profile (hidden by default) -->
+<div id="profileBlock" class="profile-block" style="display: none;">
+  <div id="nicknameDisplay" class="nickname">
+  <img src="profile-icon.png" alt="PFP" class="pfp" />
+  <div class="nickname-info">
+    <div id="nickname" class="nickname-text"></div>
+    <div id="userRank" class="rank-text">Position: —</div>
+    <div id="userWager" class="wager-text">Wager: —</div>
+  </div>
+</div> 
 
-    for (let i = 0; i < count; i++) {
-      const spark = document.createElement('span');
-      spark.style.left = Math.random() * 100 + 'vw';
-      spark.style.animationDuration = (6 + Math.random() * 6) + 's';
-      spark.style.animationDelay = Math.random() * 10 + 's';
-      spark.style.opacity = 0.3 + Math.random() * 0.4;
-      spark.style.background = 'rgba(90, 103, 216, 0.7)';
-      spark.style.width = spark.style.height = (Math.random() * 3 + 2) + 'px';
-      container.appendChild(spark);
-    }
-  </script>
+  <!-- Меню -->
+  <div id="dropdown" class="dropdown">
+    <button onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<!-- Navigation Buttons -->
+<div class="button-container" id="authButtons">
+  <a class="btn" href="leaderboard.html" id="leaderboardBtn">LEADERBOARD</a>
+  <a class="btn" href="#" onclick="openModal()" id="registerBtn">REGISTER / LOGIN</a>
+</div>
 
 <!-- Модальное окно -->
 <div class="modal" id="registerModal">
 <div class="modal-content">
 <span class="close" onclick="closeModal()">×</span>
 <h2>Register</h2>
-<form>
-<label for="email">Email:</label>
-<input id="email" required="" type="email"/>
-<label for="password">Password:</label>
-<input id="password" required="" type="password"/>
-<button class="btn" type="submit">Submit</button>
+<form onsubmit="handleRegister(event)">
+  <label for="nickname">Nickname:</label>
+  <input id="nicknameInput" required type="text"/>
+
+  <label for="email">Email:</label>
+  <input id="email" required type="email"/>
+
+  <label for="password">Password:</label>
+  <input id="password" required type="password"/>
+
+  <button class="btn" type="submit">Submit</button>
 </form>
+
 </div>
 </div>
-<script>
-  function openModal() {
-    document.getElementById("registerModal").style.display = "flex";
-  }
-  function closeModal() {
-    document.getElementById("registerModal").style.display = "none";
-  }
-  window.onclick = function(event) {
-    const modal = document.getElementById("registerModal");
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-</script>
+<script src="main.js"></script>
 </body>
 </html>
