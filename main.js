@@ -1,3 +1,45 @@
+const SUPABASE_URL = "https://zhqzyklwmqygixugujel.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpocXp5a2x3bXF5Z2l4dWd1amVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3ODc2MDgsImV4cCI6MjA2ODM2MzYwOH0.ZXqFeFrG7SVTDlad6AqOAoG2ZgeRAqru_wKg4X0jmGM";
+
+function registerUser(nickname, email, password) {
+  fetch(`${SUPABASE_URL}/rest/v1/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_KEY,
+      "Authorization": `Bearer ${SUPABASE_KEY}`,
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({ nickname, email, password })
+  })
+  .then(res => {
+    if (res.ok) {
+      alert("✅ Успешно зарегистрирован!");
+      localStorage.setItem("loggedInUser", nickname);
+      location.reload();
+    } else {
+      alert("❌ Ошибка при регистрации");
+    }
+  });
+}
+
+// Обработка формы регистрации
+function handleRegister(e) {
+  e.preventDefault();
+  const nickname = document.getElementById("nicknameInput").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (nickname && email && password) {
+    registerUser(nickname, email, password);
+  } else {
+    alert("Пожалуйста, заполните все поля");
+  }
+}
+
+// Остальной код можешь оставить как есть (спарки, логика профиля и т.д.)
+
+
 // === СПАРКИ ===
 const container = document.querySelector('.particles-container');
 const count = 40;
@@ -93,3 +135,4 @@ document.addEventListener("click", function (e) {
     dropdown.classList.remove("show");
   }
 });
+
