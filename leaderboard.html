@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Top Total Wager (Live)</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { padding: 8px 12px; border: 1px solid #ccc; }
+    th { background: #f4f4f4; }
+    #status { color: green; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Top Total Wager (Live)</h2>
+  <div id="status">⏳ Loading...</div>
+  <table id="wagerTable">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>User</th>
+        <th>Total Wager</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const STATUS = document.getElementById("status");
+
+    function fetchData() {
+      STATUS.textContent = "⏳ Refreshing...";
+      fetch("https://raw.githubusercontent.com/KeNw0oD/shuffle-wagers-data/refs/heads/main/wagers.json")
+        .then(res => res.json())
+        .then(data => {
+          const table = document.querySelector('#wagerTable tbody');
+          table.innerHTML = '';
+
+          data.sort((a, b) => {
+            const aVal = parseFloat((a.wager || "0").replace(/[$,]/g, ""));
+            const bVal = parseFloat((b.wager || "0").replace(/[$,]/g, ""));
+            return bVal - aVal;
+          });
+
+          data.forEach((entry, i) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${i + 1}</td>
+              <td>${entry.user}</td>
+              <td>${entry.wager}</td>
+            `;
+            table.appendChild(tr);
+          });
+
+          const now = new Date().toLocaleTimeString();
+          STATUS.textContent = `✅ Last updated: ${now}`;
+        })
+        .catch(err => {
+          STATUS.textContent = "❌ Failed to fetch data";
+        });
+    }
+
+    fetchData();                  // Загрузка при запуске
+    setInterval(fetchData, 60000); // Обновление каждую минуту
+  </script>
+</body>
+</html>
