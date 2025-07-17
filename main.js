@@ -25,6 +25,7 @@ function registerUser(nickname, email, password) {
 
 // Обработка формы регистрации
 function handleRegister(e) {
+  console.log("Регистрация нажата");
   e.preventDefault();
   const nickname = document.getElementById("nicknameInput").value.trim();
   const email = document.getElementById("email").value.trim();
