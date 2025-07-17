@@ -34,7 +34,6 @@ window.onclick = function(event) {
 };
 
 // === РЕГИСТРАЦИЯ ===
-// === РЕГИСТРАЦИЯ ===
 function handleRegister(e) {
   e.preventDefault();
   const nicknameRaw = document.getElementById("nicknameInput").value.trim();
@@ -49,7 +48,7 @@ function handleRegister(e) {
     return;
   }
 
-  // 🔍 Проверка: такой nickname уже есть
+  // Проверяем nickname
   fetch(`${SUPABASE_URL}/rest/v1/users?nickname=eq.${nickname}`, {
     headers: {
       "apikey": SUPABASE_KEY,
@@ -59,12 +58,25 @@ function handleRegister(e) {
   .then(res => res.json())
   .then(users => {
     if (users.length > 0) {
-      document.getElementById("registerMessage").textContent = "⚠️ This nickname is already taken";
-      document.getElementById("registerMessage").style.color = "#e53e3e";
-      throw new Error("nickname exists");
+      throw new Error("nickname_exists");
     }
 
-    // ✅ Регистрация, если ник свободен
+    // Проверяем email
+    return fetch(`${SUPABASE_URL}/rest/v1/users?email=eq.${email}`, {
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`
+      }
+    });
+  })
+  .then(res => res.json())
+  .then(usersByEmail => {
+    if (usersByEmail.length > 0) {
+      throw new Error("email_exists");
+    }
+
+      // Если оба уникальны — регистрируем
+      return bcrypt.hash(password, 10).then(hash => {
     return fetch(`${SUPABASE_URL}/rest/v1/users`, {
       method: "POST",
       headers: {
@@ -73,8 +85,10 @@ function handleRegister(e) {
         "Authorization": `Bearer ${SUPABASE_KEY}`,
         "Prefer": "return=minimal"
       },
-      body: JSON.stringify({ nickname, email, password })
+      body: JSON.stringify({ nickname, email, password: hash })
     });
+  });
+
   })
   .then(res => {
     if (res?.ok) {
@@ -88,13 +102,18 @@ function handleRegister(e) {
     }
   })
   .catch(err => {
-    if (err.message !== "nickname exists") {
+    if (err.message === "nickname_exists") {
+      document.getElementById("registerMessage").textContent = "⚠️ This nickname is already taken";
+    } else if (err.message === "email_exists") {
+      document.getElementById("registerMessage").textContent = "⚠️ This email is already registered";
+    } else {
       console.error("Registration error:", err);
       document.getElementById("registerMessage").textContent = "⚠️ Connection error";
-      document.getElementById("registerMessage").style.color = "#e53e3e";
     }
+    document.getElementById("registerMessage").style.color = "#e53e3e";
   });
 }
+
 
 
 
