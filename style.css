@@ -331,9 +331,173 @@ body {
   border-color: #5a67d8;
 }
 
+/* 🌓 Тема-переключатель */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  padding: 10px 16px;
+  font-size: 14px;
+  border-radius: 10px;
+  background: rgba(255, 215, 0, 0.08);
+  color: gold;
+  border: 1px solid gold;
+  cursor: pointer;
+  font-family: 'Roboto Slab', serif;
+}
+
+.theme-toggle:hover {
+  background: gold;
+  color: black;
+}
+
+/* 🌟 Золотая тема для профиля */
+/* 🌟 Приглушённая золотая тема для профиля */
+.profile-block.gold .nickname {
+  background: rgba(212, 162, 79, 0.25); /* мягкий полупрозрачный золотой */
+  color: white;
+  border: 1px solid rgba(212, 162, 79, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.profile-block.gold .nickname-info,
+.profile-block.gold .nickname-text,
+.profile-block.gold .rank-text,
+.profile-block.gold .wager-text {
+  color: white !important;
+}
+
+.profile-block.gold .dropdown {
+  background: rgba(40, 32, 16, 0.9);
+  border: 1px solid rgba(212, 162, 79, 0.7);
+}
+
+.profile-block.gold .dropdown button {
+  color: white;
+}
+
+.profile-block.gold .dropdown button:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+/* 🌟 ЗОЛОТАЯ ТЕМА: свечение */
+body.gold .overlay-animation::before {
+  background: radial-gradient(circle, rgba(212, 162, 79, 0.08), transparent 60%);
+}
+
+/* ✨ ЗОЛОТАЯ ТЕМА: частицы */
+body.gold .particles-container span {
+  background: rgba(212, 162, 79, 0.8);
+  box-shadow: 0 0 8px rgba(212, 162, 79, 0.9);
+}
+
+/* === ЗОЛОТАЯ ТЕМА: кнопки === */
+body.gold .btn {
+  border-color: gold;
+  color: gold;
+}
+
+body.gold .btn:hover {
+  background: gold;
+  color: black;
+  box-shadow: 0 0 20px rgba(212, 162, 79, 0.6);
+}
+
+/* Золотая тема — модалка */
+body.gold .modal-content {
+  background: rgba(40, 30, 10, 0.95); /* более тёплый глубокий фон */
+  border: 1px solid gold;
+  color: white;
+  backdrop-filter: blur(12px);
+}
+
+/* Лейблы */
+body.gold .modal-content label {
+  color: white;
+}
+
+/* Поля ввода */
+body.gold .modal-content input {
+  border: 1px solid gold;
+  background: rgba(255, 215, 0, 0.07);
+  color: white;
+}
+
+/* Placeholder (если хочешь) */
+body.gold .modal-content input::placeholder {
+  color: rgba(255,255,255,0.4);
+}
+
+/* Кнопка Submit */
+body.gold .modal-content button[type="submit"] {
+  border: 2px solid gold;
+  color: gold;
+  background: transparent;
+  font-weight: bold;
+}
+
+body.gold .modal-content button[type="submit"]:hover {
+  background: gold;
+  color: black;
+  box-shadow: 0 0 14px rgba(212, 162, 79, 0.5);
+}
+
+/* Таб-переключатели (Register / Login) */
+body.gold .tab-btn {
+  color: gold;
+}
+
+body.gold .tab-btn.active {
+  border-color: gold;
+}
+
+/* Close button */
+body.gold .close {
+  color: gold;
+}
+
+/* 💛 Кнопка смены темы, когда body.gold активен */
+body.gold button#toggleThemeBtn.theme-toggle {
+  border: 1px solid gold;
+  color: gold;
+  background: rgba(212, 162, 79, 0.08);
+  transition: all 0.3s ease;
+}
+
+body.gold button#toggleThemeBtn.theme-toggle:hover {
+  background: gold;
+  color: black;
+  box-shadow: 0 0 12px rgba(212, 162, 79, 0.6);
+}
+
+/* 🌑 Стандартный стиль кнопки смены темы */
+#toggleThemeBtn.theme-toggle {
+  border: 1px solid rgb(17, 15, 1) !important;
+  color: rgb(8, 7, 1) !important;
+  background: rgba(212, 162, 79, 0.08) !important;
+  transition: all 0.3s ease;
+}
+
+/* 🌟 Когда активна золотая тема */
+body.gold #toggleThemeBtn.theme-toggle {
+  border: 1px solid gold !important;
+  color: gold !important;
+  background: rgba(212, 162, 79, 0.08) !important;
+}
+
+/* 🌟 Ховер в золотой теме */
+body.gold #toggleThemeBtn.theme-toggle:hover {
+  background: gold !important;
+  color: black !important;
+  box-shadow: 0 0 12px rgba(212, 162, 79, 0.6);
+}
+
+
+
 @media (max-width: 768px) {
 
- html, body {
+html, body {
     max-width: 100vw;
     height: 100vh;
     overflow: hidden; /* отключает и X, и Y прокрутку */
@@ -477,4 +641,30 @@ body {
   font-size: 22px;
   top: 10px;
   right: 14px;
+}
+
+#toggleThemeBtn.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  font-size: 22px;
+  line-height: 48px;
+  text-align: center;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.75);
+  color: gold;
+  border: 2px solid gold;
+  font-weight: bold;
+  z-index: 1000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#toggleThemeBtn.theme-toggle:hover {
+  background: gold;
+  color: black;
+  box-shadow: 0 0 12px rgba(212, 162, 79, 0.6);
 }

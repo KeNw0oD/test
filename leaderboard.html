@@ -34,7 +34,7 @@
 
   <h1>LEADERBOARD</h1>
   <div class="scroll-box" id="userList"></div>
-  
+
   <a href="index.html" class="back-btn">BACK TO MAIN</a>
 
   <script>
@@ -95,7 +95,7 @@
       spark.style.animationDuration = (3 + Math.random() * 2) + 's';
       spark.style.animationDelay = Math.random() * 10 + 's';
       spark.style.opacity = 0.3 + Math.random() * 0.4;
-      spark.style.background = 'rgba(90, 103, 216, 0.7)';
+      spark.classList.add('spark-particle');
       spark.style.width = spark.style.height = (Math.random() * 3 + 2) + 'px';
       container.appendChild(spark);
     }
@@ -113,6 +113,14 @@
   function logout() {
     localStorage.removeItem("loggedInUser");
     window.location.href = "index.html";
+  }
+
+   // === ПРИМЕНИТЬ ТЕМУ ИЗ localStorage ===
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "gold") {
+    document.body.classList.add("gold");
+    const profileBlock = document.querySelector(".profile-block");
+    if (profileBlock) profileBlock.classList.add("gold");
   }
 
   // Дропдаун

@@ -14,7 +14,7 @@ for (let i = 0; i < count; i++) {
   spark.style.animationDuration = (3 + Math.random() * 2) + 's';
   spark.style.animationDelay = Math.random() * 10 + 's';
   spark.style.opacity = 0.3 + Math.random() * 0.4;
-  spark.style.background = 'rgba(90, 103, 216, 0.7)';
+  spark.classList.add('spark-particle');
   spark.style.width = spark.style.height = (Math.random() * 3 + 2) + 'px';
   container.appendChild(spark);
 }
@@ -255,3 +255,25 @@ function switchTab(tab) {
     tabBtns[1].classList.add("active");
   }
 }
+
+// === ЗОЛОТАЯ ТЕМА ===
+document.addEventListener("DOMContentLoaded", () => {
+  const profileBlock = document.querySelector(".profile-block");
+  const themeToggle = document.getElementById("toggleThemeBtn");
+
+  // Восстановить тему
+  if (localStorage.getItem("theme") === "gold") {
+    profileBlock.classList.add("gold");
+    document.body.classList.add("gold");
+  }
+
+  themeToggle.addEventListener("click", () => {
+    profileBlock.classList.toggle("gold");
+    document.body.classList.toggle("gold");
+
+    const newTheme = profileBlock.classList.contains("gold") ? "gold" : "default";
+    localStorage.setItem("theme", newTheme);
+  });
+});
+
+
