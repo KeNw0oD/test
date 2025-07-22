@@ -176,6 +176,7 @@ window.onload = function () {
       document.getElementById("leaderboardBtn").style.display = "inline-block";
       document.getElementById("authButtons").style.justifyContent = "center";
       document.getElementById("nickname").textContent = user;
+      
 
     // Центровка кнопок (если нужно)
     document.getElementById("registerBtn").style.display = "none";
@@ -202,6 +203,7 @@ window.onload = function () {
   } else {
     // Гость → показать кнопки
     document.getElementById("authButtons").style.display = "flex";
+    document.getElementById("leaderboardBtn").style.display = "none";
     document.getElementById("profileBlock").style.display = "none";
   }
 };
