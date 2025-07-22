@@ -333,10 +333,11 @@ body {
 
 @media (max-width: 768px) {
 
-  html, body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+ html, body {
+    max-width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* отключает и X, и Y прокрутку */
+  }
 
   body {
     background-image: url(background-mobile.png);
